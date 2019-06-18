@@ -8,6 +8,7 @@ import {MaterialModule} from './material/material.module';
 import {SidebarComponent} from './components/sidebar/sidebar/sidebar.component';
 import { ChartModule } from 'angular2-chartjs';
 import {ChartsModule} from 'ng2-charts';
+import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import {ChartsModule} from 'ng2-charts';
     MaterialModule,
     ChartsModule,
     ChartModule,
+    HttpClientModule
   ],
 
   providers: [],

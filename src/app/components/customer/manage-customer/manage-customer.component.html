@@ -1,3 +1,81 @@
-<p>
-  manage-customer works!
-</p>
+<div class="row marleft" >
+  <div class="col m8 s12" style="margin-top:40px;">
+    <div class="col m12 s12 white mat-elevation-z4" style=" border-radius: 4px">
+      <div class="col m12 s12 mat-elevation-z8" style="margin-top:-30px; border-radius:4px; background: linear-gradient(60deg,#ef5350,#e53935)">
+        <h5 class="white-text">Customer Form</h5>
+        <h6 class="white-text">Complete your profile</h6>
+      </div>
+      <div >
+        <mat-card-content >
+          <mat-card >
+            <form #customerForm='ngForm'>
+              <div class="controles-container">
+                <mat-form-field>
+                  <input  matInput placeholder="Customer id" type="text" id="id" name="id" [(ngModel)]="customer.id">
+                </mat-form-field>
+                <mat-form-field>
+                  <input  matInput placeholder="Customer name" type="text" id="name" name="name" [(ngModel)]="customer.name">
+                </mat-form-field>
+                <mat-form-field>
+                  <input  matInput placeholder="Customer address" type="text" id="address" name="address" [(ngModel)]="customer.address">
+                </mat-form-field>
+
+              </div>
+
+
+              <button type="submit" mat-raised-button color="primary" (click)="saveCustomer()">Customer Add</button>&nbsp;
+<!--              <button type="submit"  mat-raised-button  color="warn" (click)="deleteCustomer(customer.id)">Customer Delete</button>&nbsp;-->
+<!--              &lt;!&ndash;              <button type="submit"  mat-raised-button color="warn">Customer Delete</button>&ndash;&gt;-->
+            </form>
+          </mat-card>
+
+        </mat-card-content>
+
+      </div>
+    </div>
+  </div>
+  <div class="col m4 s12" style="margin-top:40px; ">
+
+    <div class="col m12 s12" style="margin-top:40px">
+      <div class="col m12 s12 white mat-elevation-z4" style="border-radius:4px">
+        <div class="col m12 s12 mat-elevation-z8" style="margin-top:-20px;border-radius:4px; background: linear-gradient(60deg,#ffa726,#fb8c00); padding:10px">
+          <h5 class="white-text">Simple Table </h5>
+          <h6 class="white-text">Here is a subtitle for this table </h6>
+        </div>
+        <table mat-table [dataSource]="dataSource">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix"> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix"> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix"> Address </th>
+            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+<!--          <ng-container matColumnDef="symbol">-->
+<!--            <th mat-header-cell *matHeaderCellDef class="table-head-fix"> Symbol </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>-->
+<!--          </ng-container>-->
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
