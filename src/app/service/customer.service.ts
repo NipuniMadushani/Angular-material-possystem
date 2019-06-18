@@ -15,7 +15,7 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCustomers(): Observable<Array<Customer>> {
+    getAllCustomers(): Observable<Array<Customer>> {
     return this.http.get<Array<Customer>>('http://localhost:8081/jkl/customers');
   }
 

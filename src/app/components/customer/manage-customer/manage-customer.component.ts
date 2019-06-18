@@ -23,14 +23,10 @@ export class ManageCustomerComponent implements OnInit {
   constructor(private service: CustomerService) { }
 
   ngOnInit() {
-    this.allCustomer();
+
   }
 
-  private allCustomer() {
-    this.service.getAllCustomers().subscribe(value =>
-      this.customerList = value);
-    console.log(this.customerList);
-  }
+
 
 
   saveCustomer(): void {
