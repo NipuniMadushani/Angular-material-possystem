@@ -8,13 +8,11 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" >
     <mat-toolbar class="white"><img src="../../assets/footer_logo.png" width="80%" style="margin:auto"></mat-toolbar>
     <mat-nav-list>
-      <a class="sidenavelement" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" mat-list-item href="#"><mat-icon>dashboard</mat-icon> &nbsp; Dashboard</a>
-      <a class="sidenavelement" routerLinkActive="active-link"  mat-list-item href="#"><mat-icon>person</mat-icon> &nbsp; Customer</a>
-      <a class="sidenavelement" routerLinkActive="active-link"  mat-list-item href="#"><mat-icon>table_chart</mat-icon> &nbsp; Item</a>
-      <a class="sidenavelement" routerLinkActive="active-link"  mat-list-item href="#"><mat-icon>text_fields</mat-icon> &nbsp; Typography</a>
-      <a class="sidenavelement" routerLinkActive="active-link"  mat-list-item href="#"><mat-icon>insert_emoticon</mat-icon> &nbsp; Icons</a>
-      <a class="sidenavelement" routerLinkActive="active-link" mat-list-item href="#"><mat-icon>map</mat-icon> &nbsp; Maps</a>
-      <a class="sidenavelement" routerLinkActive="active-link"  mat-list-item href="#"><mat-icon>notification_important</mat-icon> &nbsp; Notifications</a>
+      <a class="sidenavelement" routerLinkActive="active-link"  routerLink="/" [routerLinkActiveOptions]="{exact:true}" mat-list-item href="#"><mat-icon>dashboard</mat-icon> &nbsp; Dashboard</a>
+      <a class="sidenavelement" routerLinkActive="active-link" routerLink="/customer" mat-list-item href="#"><mat-icon>person</mat-icon> &nbsp; Customer</a>
+      <a class="sidenavelement" routerLinkActive="active-link" routerLink="/item"  mat-list-item href="#"><mat-icon>table_chart</mat-icon> &nbsp; Item</a>
+      <a class="sidenavelement" routerLinkActive="active-link" routerLink="/placeorder" mat-list-item href="#"><mat-icon>text_fields</mat-icon> &nbsp; Typography</a>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

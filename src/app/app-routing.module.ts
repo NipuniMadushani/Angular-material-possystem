@@ -11,6 +11,14 @@ const routes: Routes = [
     loadChildren: './components/customer/customer.module#CustomerModule'
   },
   {
+    path: 'item',
+    loadChildren: './components/item/item.module#ItemModule'
+  },
+  {
+    path: 'placeorder',
+    loadChildren: './components/placeorder/placeorder.module#PlaceorderModule'
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
