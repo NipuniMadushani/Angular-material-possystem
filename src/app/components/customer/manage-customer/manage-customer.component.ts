@@ -23,19 +23,31 @@ export class ManageCustomerComponent implements OnInit {
   constructor(private service: CustomerService) { }
 
   ngOnInit() {
-
+this.allCustomer();
   }
 
 
-
+  allCustomer(): void {
+    // this.service.getAllCustomers().subscribe(value =>
+    //   this.customerList = value);
+    // console.log(this.customerList);
+    this.customerList = new Array();
+    this.service.getAllCustomers().subscribe(value => {
+      console.log(value);
+      this.customerList = value;
+      console.log(this.customerList);
+      this.dataSource.data = this.customerList;
+      // this.paginator.length = this.numberList.length;
+    });
+  }
 
   saveCustomer(): void {
-    alert('hello');
     this.service.saveCustomer(this.customer).subscribe(
       (result) => {
         console.log(this.customer);
         console.log(this.customerForm);
         alert('Customer Added Successfully ');
+        this.allCustomer();
 
       }
     );
