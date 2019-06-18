@@ -26,6 +26,6 @@ export class CustomerService {
 
   deleteCustomer(id: number): Observable<boolean> {
     console.log('Hello');
-    return this.http.delete<boolean>('http://localhost:8081/jkl/customers' + '?'  + '='  + id);
+    return this.http.delete<boolean>('http://localhost:8081/jkl/customers/' + id);
   }
 }

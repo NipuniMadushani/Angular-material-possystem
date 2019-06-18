@@ -65,7 +65,22 @@
             <td mat-cell *matCellDef="let element"> {{element.address}} </td>
           </ng-container>
 
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix"> Delete </th>
+            <td mat-cell *matCellDef="let row">
 
+              <button mat-icon-button color="warn"><mat-icon  (click)=" onDelete(row.id)">delete_outline</mat-icon>
+              </button>
+            </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="Edit" >
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix" >Edit  </th>
+            <td mat-cell *matCellDef="let element;let i = index;" ><button  mat-icon-button  (click)="updateSubmit(element)">
+              <mat-icon>launch</mat-icon>
+            </button>   </td>
+          </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

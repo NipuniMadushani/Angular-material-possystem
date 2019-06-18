@@ -17,7 +17,7 @@ export class ManageCustomerComponent implements OnInit {
   cust: Customer = null;
 
   @ViewChild('customerForm', {static: true}) customerForm: NgForm;
-  displayedColumns: string[] = ['id', 'name', 'address'];
+  displayedColumns: string[] = ['id', 'name', 'address', 'actions', 'Edit'];
   // dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource<Customer>(this.customerList);
   constructor(private service: CustomerService) { }
@@ -53,4 +53,20 @@ this.allCustomer();
     );
   }
 
+  onDelete(id: number): void {
+    if (confirm('Are you want to delete this Customer?')) {
+      console.log(id);
+      this.service.deleteCustomer(id).subscribe(
+        (result) => {
+          alert('Customer Delete Successfully');
+        }
+      );
+    }
+  }
+
+  updateSubmit(row) {
+    this.customerForm.form.get('id').setValue(row.id);
+    this.customerForm.form.get('name').setValue(row.name);
+    this.customerForm.form.get('address').setValue(row.address);
+  }
 }
