@@ -6,17 +6,20 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import {SidebarComponent} from './components/sidebar/sidebar/sidebar.component';
-
+import { ChartModule } from 'angular2-chartjs';
+import {ChartsModule} from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule,
+    ChartModule,
   ],
 
   providers: [],
