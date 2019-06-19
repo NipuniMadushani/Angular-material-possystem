@@ -25,4 +25,10 @@ export class ItemService {
     console.log(code);
     return this.http.delete<boolean>('http://localhost:8081/jkl/items?code'  + '=' + code);
   }
+
+  searchItem(code: string): Observable<Item> {
+    return this.http.get<Item>('http://localhost:8081/jkl/items?code'  + '=' + code);
+
+
+  }
 }

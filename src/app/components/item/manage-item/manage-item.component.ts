@@ -19,7 +19,7 @@ export class ManageItemComponent implements OnInit {
   itemList: Array<Item> = [];
   manually = false;
   @ViewChild(MatSort, {static: true})sort: MatSort;
-  @ViewChild('itemForm', {static: true}) customerForm: NgForm;
+  @ViewChild('itemForm', {static: true}) itemForm: NgForm;
   @ViewChild('paginator', {static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['code', 'description', 'qtyOnHand', 'unitPrice', 'actions', 'Edit'];
   // dataSource = ELEMENT_DATA;
@@ -52,7 +52,7 @@ export class ManageItemComponent implements OnInit {
     this.itemService.saveItem(this.item).subscribe(
       (result) => {
         console.log(this.item);
-        console.log(this.customerForm);
+        console.log(this.itemForm);
         alert('Customer Added Successfully ');
         this.allItem();
 
@@ -64,7 +64,19 @@ export class ManageItemComponent implements OnInit {
   }
 
   searchItem(code: string) {
-  }
+
+    this.itemService.searchItem(code).subscribe(value => {
+      console.log(value);
+      alert('Do you want to search this code?');
+      this.itemForm.form.get('description').setValue(value.description);
+      this.itemForm.form.get('qtyOnHand').setValue(value.qtyOnHand);
+      this.itemForm.form.get('unitPrice').setValue(value.unitPrice);
+      console.log('mmmmmm');
+    }
+    );
+
+    }
+
 
   onDelete(code: number) {
     if (confirm('Are you want to delete this Customer?')) {

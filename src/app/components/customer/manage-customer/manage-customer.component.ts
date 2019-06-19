@@ -37,6 +37,8 @@ export class ManageCustomerComponent implements OnInit {
   }
 
 
+
+
   allCustomer(): void {
 
     this.customerList = new Array();
