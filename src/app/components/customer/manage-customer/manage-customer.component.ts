@@ -2,7 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Customer} from '../../../dto/customer';
 import {CustomerService} from '../../../service/customer.service';
 import {NgForm} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+
+
 
 @Component({
   selector: 'app-manage-customer',
@@ -10,38 +12,67 @@ import {MatTableDataSource} from '@angular/material';
   styleUrls: ['./manage-customer.component.css']
 })
 export class ManageCustomerComponent implements OnInit {
+  constructor(private service: CustomerService) { }
 
   customer: Customer = new Customer();
   customerList: Array<Customer> = [];
   manually = false;
-  cust: Customer = null;
+  customerList1: Array< Customer> = [];
 
+  customer1: Array<Customer> = [];
+  customer2: Customer = new Customer();
+
+
+  @ViewChild(MatSort, {static: true})sort: MatSort;
   @ViewChild('customerForm', {static: true}) customerForm: NgForm;
-  displayedColumns: string[] = ['id', 'name', 'address', 'actions', 'Edit'];
+  @ViewChild('paginator', {static: true }) paginator: MatPaginator;
+  displayedColumns: string[] = ['id', 'name', 'address', 'actions', 'Edit' , 'Update'];
   // dataSource = ELEMENT_DATA;
+
   dataSource = new MatTableDataSource<Customer>(this.customerList);
-  constructor(private service: CustomerService) { }
+  isEdit = false;
+  custo: Customer[] = new Array();
+  cus: Customer = null;
 
   ngOnInit() {
-this.allCustomer();
+   this.allCustomer();
+   this.dataSource.paginator = this.paginator;
+   this.dataSource.sort = this.sort;
   }
 
 
+
+
   allCustomer(): void {
-    // this.service.getAllCustomers().subscribe(value =>
-    //   this.customerList = value);
-    // console.log(this.customerList);
+
     this.customerList = new Array();
     this.service.getAllCustomers().subscribe(value => {
       console.log(value);
       this.customerList = value;
       console.log(this.customerList);
       this.dataSource.data = this.customerList;
-      // this.paginator.length = this.numberList.length;
+      // this.paginator.length = this.customerList.length;
+      // this.customerList.length = this.sort;
     });
   }
 
+
+  searchCustomer(id: string) {
+    // this.customerList = new Array();
+    this.service.searchCustomer(id).subscribe(value => {
+      console.log(value);
+      this.customerForm.form.get('name').setValue(value.name);
+      this.customerForm.form.get('address').setValue(value.address);
+      // this.customerList = value;
+      // console.log(this.customerList);
+      // this.dataSource.data = this.customerList;
+      // this.paginator.length = this.customerList.length;
+      // this.customerList.length = this.sort;
+    });
+
+  }
   saveCustomer(): void {
+
     this.service.saveCustomer(this.customer).subscribe(
       (result) => {
         console.log(this.customer);
@@ -83,6 +114,45 @@ this.allCustomer();
   }
 
   private clear() {
+  }
 
+
+  // searchCustomer(id: string): void {
+  //   this.service.searchCustomer(id).subscribe(value => {
+  //     console.log(value);
+  //
+  //     this.custo = value;
+  //
+  //     console.log(this.custo);
+  //
+  //     for (const con of this.custo) {
+  //       console.log(con);
+  //
+  //     }
+  //   });
+
+    // this.service.searchCustomer(id).subscribe(value => {
+    //   console.log(value);
+    //   this.customerList = value;
+    //   console.log(this.customerList);
+    //   this.dataSource.data = this.customerList;
+    //   console.log(this.dataSource.data);
+    // });
+
+
+
+
+update(row) {
+    console.log(row);
+    if (confirm('Are You Want to Edit this Customer...!')) {
+
+      this.isEdit = true;
+      this.customerForm.form.get('id').setValue(row.id);
+      this.customerForm.form.get('name').setValue(row.name);
+      this.customerForm.form.get('address').setValue(row.address);
+
+      this.allCustomer();
+
+    }
   }
 }

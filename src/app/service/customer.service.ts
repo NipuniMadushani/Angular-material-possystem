@@ -29,8 +29,13 @@ export class CustomerService {
     return this.http.delete<boolean>('http://localhost:8081/jkl/customers?id'  + '=' + id);
   }
 
-  updateCustomer(customer: Customer): Observable<boolean> {
-    return this.http.put<boolean>('http://localhost:8081/jkl/customers', customer);
+  updateCustomer(customer: Customer ): Observable<boolean> {
+    return this.http.put<boolean>('http://localhost:8081/jkl/customers' , customer);
   }
 
+  searchCustomer(id: string): Observable<Customer> {
+    return this.http.get<Customer>('http://localhost:8081/jkl/customers?id'  + '=' + id);
+
+
+  }
 }
