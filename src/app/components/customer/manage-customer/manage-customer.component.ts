@@ -59,6 +59,7 @@ this.allCustomer();
       this.service.deleteCustomer(id).subscribe(
         (result) => {
           alert('Customer Delete Successfully');
+          this.allCustomer();
         }
       );
     }
@@ -68,5 +69,20 @@ this.allCustomer();
     this.customerForm.form.get('id').setValue(row.id);
     this.customerForm.form.get('name').setValue(row.name);
     this.customerForm.form.get('address').setValue(row.address);
+  }
+
+  updateCustomer(id): void {
+    this.service.updateCustomer(id).subscribe((result) => {
+      alert('Customer Update Successfully');
+      this.clear();
+      this.manually = true;
+      this.allCustomer();
+
+    });
+
+  }
+
+  private clear() {
+
   }
 }
