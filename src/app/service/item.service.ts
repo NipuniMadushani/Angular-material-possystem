@@ -20,4 +20,9 @@ export class ItemService {
 
   }
 
+
+  deleteItem(code: number): Observable<boolean> {
+    console.log(code);
+    return this.http.delete<boolean>('http://localhost:8081/jkl/items?code'  + '=' + code);
+  }
 }

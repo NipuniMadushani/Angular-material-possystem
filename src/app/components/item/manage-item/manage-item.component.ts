@@ -66,7 +66,16 @@ export class ManageItemComponent implements OnInit {
   searchItem(code: string) {
   }
 
-  onDelete(code: any) {
+  onDelete(code: number) {
+    if (confirm('Are you want to delete this Customer?')) {
+      console.log(code);
+      this.itemService.deleteItem(code).subscribe(
+        (result) => {
+          alert('Customer Delete Successfully');
+          this.allItem();
+        }
+      );
+    }
   }
 
   updateSubmit(element: any) {
