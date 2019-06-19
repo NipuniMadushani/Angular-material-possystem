@@ -1,3 +1,113 @@
-<p>
-  manage-item works!
-</p>
+
+<div class="row marleft" >
+  <div class="col m8 s12" style="margin-top:40px;">
+    <div class="col m12 s12 white mat-elevation-z4" style=" border-radius: 4px">
+      <div class="col m12 s12 mat-elevation-z8" style="margin-top:-30px; border-radius:4px; background: linear-gradient(60deg,#ef5350,#e53935)">
+        <h5 class="white-text">Item Form</h5>
+        <h6 class="white-text">Complete Item Details</h6>
+      </div>
+      <div >
+        <mat-card-content >
+          <mat-card >
+            <form #itemForm='ngForm'>
+              <div class="controles-container">
+                <mat-form-field>
+                  <input  matInput placeholder="Code" type="text" id="code" name="code" [(ngModel)]="item.code">
+                </mat-form-field>
+                <mat-form-field>
+                  <input  matInput placeholder="Description" type="text" id="description" name="description" [(ngModel)]="item.description">
+                </mat-form-field>
+                <mat-form-field>
+                  <input  matInput placeholder="QtyOnHand" type="text" id="qtyOnHand" name="qtyOnHand" [(ngModel)]="item.qtyOnHand">
+                </mat-form-field>
+                <mat-form-field>
+                  <input  matInput placeholder="unitPrice" type="text" id="unitPrice" name="unitPrice" [(ngModel)]="item.unitPrice">
+                </mat-form-field>
+              </div>
+
+
+              <button type="submit" mat-raised-button color="primary" (click)="saveItem()">Item Detail Add</button>&nbsp;
+              &nbsp;&nbsp;
+
+              <button type="submit"  mat-raised-button color="primary" (click)="updateItem(item)">Update</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="submit"  mat-raised-button color="primary" (click)="searchItem(item.code)">Search</button>
+            </form>
+          </mat-card>
+
+        </mat-card-content>
+
+      </div>
+    </div>
+  </div>
+  <div class="col m4 s12" style="margin-top:15px; ">
+
+    <div class="col m12 s12" style="margin-top:15px">
+      <div class="col m12 s12 white mat-elevation-z4" style="border-radius:4px">
+        <div class="col m12 s12 mat-elevation-z8" style="margin-top:-20px;border-radius:4px; background: linear-gradient(60deg,#ffa726,#fb8c00); padding:10px">
+          <h5 class="white-text"> All Item Details Table </h5>
+          <h6 class="white-text"> </h6>
+
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Id Column -->
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix" mat-sort-header> Code </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix" mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+
+          <!-- Address Column -->
+          <ng-container matColumnDef="qtyOnHand">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix" mat-sort-header> QtyOnHand </th>
+            <td mat-cell *matCellDef="let element"> {{element.qtyOnHand}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="unitPrice">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix" mat-sort-header>   UnitPrice </th>
+            <td mat-cell *matCellDef="let element"> {{element.unitPrice}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix"> Delete </th>
+            <td mat-cell *matCellDef="let row">
+
+              <button mat-icon-button color="warn"><mat-icon  (click)=" onDelete(row.code)">delete_outline</mat-icon>
+              </button>
+            </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="Edit" >
+            <th mat-header-cell *matHeaderCellDef class="table-head-fix" >Edit  </th>
+            <td mat-cell *matCellDef="let element;let i = index;" ><button  mat-icon-button  (click)="updateSubmit(element)">
+              <mat-icon>launch</mat-icon>
+            </button>   </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Update" >
+            <th mat-header-cell *matHeaderCellDef >  </th>
+            <td mat-cell *matCellDef="let element;let i = index;" ><button  mat-icon-button  (click)="update(element)">
+              <mat-icon style="color: green">edit</mat-icon>
+            </button>   </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginator [length]="100" [pageSize]="2" [pageSizeOptions]="[1,10,15,20,30,50,80]" showFirstLastButtons>
+        </mat-paginator>
+
+      </div>
+    </div>
+  </div>
+</div>

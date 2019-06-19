@@ -17,30 +17,24 @@ export class ManageCustomerComponent implements OnInit {
   customer: Customer = new Customer();
   customerList: Array<Customer> = [];
   manually = false;
-  customerList1: Array< Customer> = [];
 
-  customer1: Array<Customer> = [];
-  customer2: Customer = new Customer();
 
 
   @ViewChild(MatSort, {static: true})sort: MatSort;
   @ViewChild('customerForm', {static: true}) customerForm: NgForm;
   @ViewChild('paginator', {static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['id', 'name', 'address', 'actions', 'Edit' , 'Update'];
+  displayedColumns: string[] = ['id', 'name', 'address', 'actions', 'Edit'];
   // dataSource = ELEMENT_DATA;
 
   dataSource = new MatTableDataSource<Customer>(this.customerList);
   isEdit = false;
-  custo: Customer[] = new Array();
-  cus: Customer = null;
+
 
   ngOnInit() {
    this.allCustomer();
    this.dataSource.paginator = this.paginator;
    this.dataSource.sort = this.sort;
   }
-
-
 
 
   allCustomer(): void {
@@ -51,8 +45,7 @@ export class ManageCustomerComponent implements OnInit {
       this.customerList = value;
       console.log(this.customerList);
       this.dataSource.data = this.customerList;
-      // this.paginator.length = this.customerList.length;
-      // this.customerList.length = this.sort;
+      this.paginator.length = this.customerList.length;
     });
   }
 
@@ -63,11 +56,6 @@ export class ManageCustomerComponent implements OnInit {
       console.log(value);
       this.customerForm.form.get('name').setValue(value.name);
       this.customerForm.form.get('address').setValue(value.address);
-      // this.customerList = value;
-      // console.log(this.customerList);
-      // this.dataSource.data = this.customerList;
-      // this.paginator.length = this.customerList.length;
-      // this.customerList.length = this.sort;
     });
 
   }
