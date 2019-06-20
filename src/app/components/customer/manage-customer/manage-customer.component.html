@@ -11,8 +11,14 @@
             <form #customerForm='ngForm'>
               <div class="controles-container">
                 <mat-form-field>
-                  <input  matInput placeholder="Customer id" type="text" id="id" name="id" [(ngModel)]="customer.id">
+                  <input  matInput placeholder="Customer id" type="text" id="id" name="id" [(ngModel)]="customer.id" #userName="ngModel" (change)="logChange(userName)" required
+                          minlength="3">
+
                 </mat-form-field>
+                <div   *ngIf="!userName.valid">
+                  <span  class="alert alert-danger"*ngIf="userName.errors.required">Id is required</span>
+                  <span class="alert alert-primary" *ngIf="userName.errors.minlength">Id should have min 3 characters</span>
+                </div>
                 <mat-form-field>
                   <input  matInput placeholder="Customer name" type="text" id="name" name="name" [(ngModel)]="customer.name">
                 </mat-form-field>

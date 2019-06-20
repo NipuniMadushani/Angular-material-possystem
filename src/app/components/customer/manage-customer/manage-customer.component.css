@@ -83,3 +83,10 @@ table {
 
 }
 
+.ng-valid[required], .ng-valid.required  {
+  border-left: 2px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: solid #a94442; /* red */
+}

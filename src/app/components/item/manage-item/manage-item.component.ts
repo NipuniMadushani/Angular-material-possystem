@@ -90,7 +90,11 @@ export class ManageItemComponent implements OnInit {
     }
   }
 
-  updateSubmit(element: any) {
+  updateSubmit(row) {
+    this.itemForm.form.get('code').setValue(row.code);
+    this.itemForm.form.get('description').setValue(row.description);
+    this.itemForm.form.get('qtyOnHand').setValue(row.qtyOnHand);
+    this.itemForm.form.get('unitPrice').setValue(row.unitPrice);
   }
 
   update(element: any) {

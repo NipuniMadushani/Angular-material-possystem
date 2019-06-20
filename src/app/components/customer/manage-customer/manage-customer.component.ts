@@ -145,4 +145,9 @@ update(row) {
 
     }
   }
+
+  logChange(data) {
+    console.log(data);
+
+  }
 }
