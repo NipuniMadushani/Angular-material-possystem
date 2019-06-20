@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagePlaceorderComponent implements OnInit {
 
+
+
   constructor() { }
 
   ngOnInit() {

@@ -102,7 +102,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator #paginator [length]="100" [pageSize]="2" [pageSizeOptions]="[1,10,15,20,30,50,80]" showFirstLastButtons>
+        <mat-paginator #paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5,10,15,20,30,50,80]" showFirstLastButtons>
         </mat-paginator>
 
       </div>
