@@ -31,6 +31,7 @@ export class ManagePlaceorderComponent implements OnInit {
   placeOrder: PlaceOrder;
   orders: Orders;
   Total = 0;
+  mydate = Date.now();
   @ViewChild('orderFrm', {static: true }) orderFrm: NgForm;
 
 
