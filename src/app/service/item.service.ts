@@ -9,6 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ItemService {
 
+
   constructor(private http: HttpClient) { }
 
   getAllItems(): Observable<Array<Item>> {
@@ -19,7 +20,6 @@ export class ItemService {
     return this.http.post<boolean>('http://localhost:8081/jkl/items', item);
 
   }
-
 
   deleteItem(code: number): Observable<boolean> {
     console.log(code);

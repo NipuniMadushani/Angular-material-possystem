@@ -4,6 +4,7 @@ import {ItemService} from '../../../service/item.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {NgForm} from '@angular/forms';
 import {Item} from '../../../dto/item';
+import {Customer} from '../../../dto/customer';
 
 @Component({
   selector: 'app-manage-item',
@@ -12,22 +13,23 @@ import {Item} from '../../../dto/item';
 })
 export class ManageItemComponent implements OnInit {
 
-  constructor(private  itemService: ItemService) { }
+  constructor(private  itemService: ItemService) {
+  }
 
- // @ts-ignore
+  // @ts-ignore
   item: Item = new Item();
   itemList: Array<Item> = [];
   manually = false;
-  @ViewChild(MatSort, {static: true})sort: MatSort;
+  tempItem: Item = null;
+  manuallySelected = true;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild('itemForm', {static: true}) itemForm: NgForm;
-  @ViewChild('paginator', {static: true }) paginator: MatPaginator;
+  @ViewChild('paginator', {static: true}) paginator: MatPaginator;
   displayedColumns: string[] = ['code', 'description', 'qtyOnHand', 'unitPrice', 'actions', 'Edit'];
   // dataSource = ELEMENT_DATA;
 
   dataSource = new MatTableDataSource<Item>(this.itemList);
   isEdit = false;
-
-
 
 
   ngOnInit() {
@@ -66,16 +68,16 @@ export class ManageItemComponent implements OnInit {
   searchItem(code: string) {
 
     this.itemService.searchItem(code).subscribe(value => {
-      console.log(value);
-      alert('Do you want to search this code?');
-      this.itemForm.form.get('description').setValue(value.description);
-      this.itemForm.form.get('qtyOnHand').setValue(value.qtyOnHand);
-      this.itemForm.form.get('unitPrice').setValue(value.unitPrice);
-      console.log('mmmmmm');
-    }
+        console.log(value);
+        alert('Do you want to search this code?');
+        this.itemForm.form.get('description').setValue(value.description);
+        this.itemForm.form.get('qtyOnHand').setValue(value.qtyOnHand);
+        this.itemForm.form.get('unitPrice').setValue(value.unitPrice);
+        console.log('mmmmmm');
+      }
     );
 
-    }
+  }
 
 
   onDelete(code: number) {
@@ -98,5 +100,17 @@ export class ManageItemComponent implements OnInit {
   }
 
   update(element: any) {
+  }
+
+  private clear() {
+    const index = this.itemList.indexOf(this.item);
+    if (index !== -1) {
+      this.itemList[index] = this.tempItem;
+      this.tempItem = null;
+    }
+    // @ts-ignore
+    this.item = new Item();
+    this.manuallySelected = false;
+
   }
 }

@@ -11,7 +11,7 @@
             <form #customerForm='ngForm'>
               <div class="controles-container">
                 <mat-form-field>
-                  <input  matInput placeholder="Customer id" type="text" id="id" name="id" [(ngModel)]="customer.id" #userName="ngModel" (change)="logChange(userName)" required
+                  <input  matInput placeholder="Customer id" type="text" id="id" name="id"  [(ngModel)]="customer.id" #userName="ngModel" (change)="logChange(userName)" required
                           minlength="3">
 
                 </mat-form-field>
@@ -20,7 +20,7 @@
                   <span class="alert alert-primary" *ngIf="userName.errors.minlength">Id should have min 3 characters</span>
                 </div>
                 <mat-form-field>
-                  <input  matInput placeholder="Customer name" type="text" id="name" name="name" [(ngModel)]="customer.name">
+                  <input  matInput placeholder="Customer name" type="text" id="name" name="name" [(ngModel)]="customer.name" >
                 </mat-form-field>
                 <mat-form-field>
                   <input  matInput placeholder="Customer address" type="text" id="address" name="address" [(ngModel)]="customer.address">
@@ -35,6 +35,8 @@
     <button type="submit"  mat-raised-button color="primary" (click)="updateCustomer(customer)">Update</button>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="submit"  mat-raised-button color="primary" (click)="searchCustomer(customer.id)">Search</button>
+              &nbsp;&nbsp;&nbsp;
+              <button type="submit" style="background-color: #ab47bc" mat-raised-button color="#ab47bc" (click)="clear()">Clear</button>
             </form>
           </mat-card>
 
@@ -88,21 +90,17 @@
           <ng-container matColumnDef="Edit" >
             <th mat-header-cell *matHeaderCellDef class="table-head-fix" >Edit  </th>
             <td mat-cell *matCellDef="let element;let i = index;" ><button  mat-icon-button  (click)="updateSubmit(element)">
+
               <mat-icon>launch</mat-icon>
             </button>   </td>
           </ng-container>
 
-          <ng-container matColumnDef="Update" >
-            <th mat-header-cell *matHeaderCellDef >  </th>
-            <td mat-cell *matCellDef="let element;let i = index;" ><button  mat-icon-button  (click)="update(element)">
-              <mat-icon style="color: green">edit</mat-icon>
-            </button>   </td>
-          </ng-container>
+
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator #paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5,10,15,20,30,50,80]" showFirstLastButtons>
+        <mat-paginator #paginator [length]="100" [pageSize]="3" [pageSizeOptions]="[3,10,15,20,30,50,80]" showFirstLastButtons>
         </mat-paginator>
 
       </div>

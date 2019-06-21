@@ -1,8 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Customer} from '../../../dto/customer';
+
+
 import {CustomerService} from '../../../service/customer.service';
 import {NgForm} from '@angular/forms';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Customer} from '../../../dto/customer';
 
 
 
@@ -27,7 +29,9 @@ export class ManageCustomerComponent implements OnInit {
   // dataSource = ELEMENT_DATA;
 
   dataSource = new MatTableDataSource<Customer>(this.customerList);
-  isEdit = false;
+
+  manuallySelected = true;
+tempCustomer: Customer = null;
 
 
   ngOnInit() {
@@ -93,7 +97,7 @@ export class ManageCustomerComponent implements OnInit {
   }
 
   updateCustomer(id): void {
-    this.service.updateCustomer(id).subscribe((result) => {
+    this.service.updateCustomer(this.customer).subscribe((result) => {
       alert('Customer Update Successfully');
       this.clear();
       this.manually = true;
@@ -102,8 +106,15 @@ export class ManageCustomerComponent implements OnInit {
     });
 
   }
-
   private clear() {
+    const index = this.customerList.indexOf(this.customer);
+    if (index !== -1) {
+      this.customerList[index] = this.tempCustomer;
+      this.tempCustomer = null;
+    }
+    this.customer = new Customer('', '', '');
+    this.manuallySelected = false;
+
   }
 
 
@@ -132,19 +143,7 @@ export class ManageCustomerComponent implements OnInit {
 
 
 
-update(row) {
-    console.log(row);
-    if (confirm('Are You Want to Edit this Customer...!')) {
 
-      this.isEdit = true;
-      this.customerForm.form.get('id').setValue(row.id);
-      this.customerForm.form.get('name').setValue(row.name);
-      this.customerForm.form.get('address').setValue(row.address);
-
-      this.allCustomer();
-
-    }
-  }
 
   logChange(data) {
     console.log(data);
